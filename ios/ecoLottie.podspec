@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
   s.homepage     = "https://eco.app"
   s.license      = "MIT"
-  s.author             = { "kuaifan" => "aipaw@live.cn" }
+  s.author             = { "kjeco" => "kjeco@kjeco.cn" }
   s.source =  { :path => '.' }
   s.source_files  = "ecoLottie", "**/**/*.{h,m,mm,c}"
   s.exclude_files = "Source/Exclude"

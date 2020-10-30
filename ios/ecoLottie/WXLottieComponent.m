@@ -19,6 +19,7 @@ WX_EXPORT_METHOD(@selector(play))
 WX_EXPORT_METHOD(@selector(pause))
 WX_EXPORT_METHOD(@selector(resume))
 WX_EXPORT_METHOD(@selector(stop))
+WX_EXPORT_METHOD(@selector(playFromProgress:toProgress:callback:))
 
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance {
     if (self = [super initWithRef:ref type:type styles:styles attributes:attributes events:events weexInstance:weexInstance]) {
@@ -154,6 +155,12 @@ WX_EXPORT_METHOD(@selector(stop))
 
 - (void)stop {
     [[self getLottie] stop];
+}
+
+- (void)playFromProgress:(CGFloat)fromProgress toProgress:(CGFloat)toEndProgress callback:(WXModuleKeepAliveCallback)callback {
+    [[self getLottie] playFromProgress:fromProgress toProgress:toEndProgress withCompletion:^(BOOL animationFinished) {
+        callback(@{@"animationFinished": @(animationFinished)}, YES);
+    }];
 }
 
 - (LOTAnimationView *)getLottie {

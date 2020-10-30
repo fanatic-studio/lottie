@@ -2,6 +2,7 @@ package eco.android.ecoLottie.component;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -169,6 +170,44 @@ public class WXLottie extends WXVContainer<ViewGroup> {
             return;
         }
         mLottie.setRepeatCount(loop ? -1 : 0);
+    }
+    /**
+     * 设置进度
+     * @param progress
+     */
+    @JSMethod
+    public void setProgress(float progress) {
+        if (mLottie == null) {
+            return;
+        }
+        mLottie.setProgress(progress);
+    }
+
+    /**
+     * 设置帧
+     * @param frame
+     */
+    @JSMethod
+    public void setFrameStart(int frame) {
+        if (mLottie == null) {
+            return;
+        }
+//        mLottie.setFrame(frame);
+        mLottie.setMinAndMaxFrame(frame,100);
+    }
+
+
+    /**
+     * 设置帧
+     * @param frame
+     */
+    @JSMethod
+    public void setFrameEnd(int frame) {
+        if (mLottie == null) {
+            return;
+        }
+//        mLottie.setFrame(frame);
+        mLottie.setMinAndMaxFrame(0,frame);
     }
 
     /**

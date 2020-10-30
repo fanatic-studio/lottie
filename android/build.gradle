@@ -26,7 +26,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.airbnb.android:lottie:3.4.0"
+    implementation "com.airbnb.android:lottie:3.4.2"
     //
     compileOnly "com.alibaba:fastjson:${project.fastjsonLibVersion}"
     compileOnly "org.apache.weex:sdk_legacy:${project.weex_sdkLibVersion}"
