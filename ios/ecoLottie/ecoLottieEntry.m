@@ -1,13 +1,13 @@
 //
-//  vdLottieEntry.m
+//  ecoLottieEntry.m
 //  Pods
 //
 
-#import "vdLottieEntry.h"
+#import "ecoLottieEntry.h"
 #import "WeexInitManager.h"
 
-WEEX_PLUGIN_INIT(vdLottieEntry)
-@implementation vdLottieEntry
+WEEX_PLUGIN_INIT(ecoLottieEntry)
+@implementation ecoLottieEntry
 
 //启动成功
 - (void) didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

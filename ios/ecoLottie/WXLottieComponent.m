@@ -56,7 +56,7 @@ WX_EXPORT_METHOD(@selector(stop))
 
 - (void)dataKey:(NSString *)key value:(id)value isUpdate:(BOOL)isUpdate {
     key = [DeviceUtil convertToCamelCaseFromSnakeCase:key];
-    if ([key isEqualToString:@"vd"] && [value isKindOfClass:[NSDictionary class]]) {
+    if ([key isEqualToString:@"eco"] && [value isKindOfClass:[NSDictionary class]]) {
         NSArray *array = [value allKeys];
         for (NSString *k in array) {
             [self dataKey:k value:value[k] isUpdate:isUpdate];

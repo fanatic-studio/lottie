@@ -1,4 +1,4 @@
-package vd.android.vdLottie.component;
+package eco.android.ecoLottie.component;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,14 +17,14 @@ import com.taobao.weex.ui.component.WXVContainer;
 import java.util.HashMap;
 import java.util.Map;
 
-import app.vd.framework.extend.module.vdCommon;
-import app.vd.framework.extend.module.vdConstants;
-import app.vd.framework.extend.module.vdIhttp;
-import app.vd.framework.extend.module.vdJson;
-import app.vd.framework.extend.module.vdPage;
-import app.vd.framework.extend.module.vdParse;
-import app.vd.framework.extend.module.http.HttpResponseParser;
-import vd.android.vdLottie.R;
+import app.eco.framework.extend.module.ecoCommon;
+import app.eco.framework.extend.module.ecoConstants;
+import app.eco.framework.extend.module.ecoIhttp;
+import app.eco.framework.extend.module.ecoJson;
+import app.eco.framework.extend.module.ecoPage;
+import app.eco.framework.extend.module.ecoParse;
+import app.eco.framework.extend.module.http.HttpResponseParser;
+import eco.android.ecoLottie.R;
 
 
 public class WXLottie extends WXVContainer<ViewGroup> {
@@ -42,8 +42,8 @@ public class WXLottie extends WXVContainer<ViewGroup> {
         mView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_lottie, null);
         initPagerView();
         //
-        if (getEvents().contains(vdConstants.Event.READY)) {
-            fireEvent(vdConstants.Event.READY, null);
+        if (getEvents().contains(ecoConstants.Event.READY)) {
+            fireEvent(ecoConstants.Event.READY, null);
         }
         //
         return (ViewGroup) mView;
@@ -77,8 +77,8 @@ public class WXLottie extends WXVContainer<ViewGroup> {
 
     private boolean initProperty(String key, Object val) {
         switch (key) {
-            case "vd":
-                JSONObject json = vdJson.parseObject(vdParse.parseStr(val, ""));
+            case "eco":
+                JSONObject json = ecoJson.parseObject(ecoParse.parseStr(val, ""));
                 if (json.size() > 0) {
                     for (Map.Entry<String, Object> entry : json.entrySet()) {
                         initProperty(entry.getKey(), entry.getValue());
@@ -88,19 +88,19 @@ public class WXLottie extends WXVContainer<ViewGroup> {
 
             case "src":
             case "url":
-                setSrc(vdParse.parseStr(val, ""));
+                setSrc(ecoParse.parseStr(val, ""));
                 return true;
 
             case "loop":
-                setLoop(vdParse.parseBool(val, true));
+                setLoop(ecoParse.parseBool(val, true));
                 return true;
 
             case "speed":
-                setSpeed(vdParse.parseFloat(val));
+                setSpeed(ecoParse.parseFloat(val));
                 return true;
 
             case "content":
-                setContent(vdParse.parseStr(val));
+                setContent(ecoParse.parseStr(val));
                 return true;
 
             default:
@@ -122,13 +122,13 @@ public class WXLottie extends WXVContainer<ViewGroup> {
             return;
         }
         final Map<String, Object> retData = new HashMap<>();
-        String newSrc = vdPage.rewriteUrl(getContext(), src);
+        String newSrc = ecoPage.rewriteUrl(getContext(), src);
         retData.put("src", newSrc);
-        if (getEvents().contains(vdConstants.Event.STATE_CHANGED)) {
+        if (getEvents().contains(ecoConstants.Event.STATE_CHANGED)) {
             retData.put("status", "loading");
-            fireEvent(vdConstants.Event.STATE_CHANGED, retData);
+            fireEvent(ecoConstants.Event.STATE_CHANGED, retData);
         }
-        vdIhttp.get("WXLottie::" + vdCommon.md5(newSrc), newSrc, null, new vdIhttp.ResultCallback() {
+        ecoIhttp.get("WXLottie::" + ecoCommon.md5(newSrc), newSrc, null, new ecoIhttp.ResultCallback() {
             @Override
             public void progress(long total, long current, boolean isDownloading) {
 
@@ -137,18 +137,18 @@ public class WXLottie extends WXVContainer<ViewGroup> {
             @Override
             public void success(HttpResponseParser resData, boolean isCache) {
                 setContent(resData.getBody());
-                if (getEvents().contains(vdConstants.Event.STATE_CHANGED)) {
+                if (getEvents().contains(ecoConstants.Event.STATE_CHANGED)) {
                     retData.put("status", "success");
-                    fireEvent(vdConstants.Event.STATE_CHANGED, retData);
+                    fireEvent(ecoConstants.Event.STATE_CHANGED, retData);
                 }
             }
 
             @Override
             public void error(String error, int errCode) {
-                if (getEvents().contains(vdConstants.Event.STATE_CHANGED)) {
+                if (getEvents().contains(ecoConstants.Event.STATE_CHANGED)) {
                     retData.put("status", "error");
                     retData.put("error", error);
-                    fireEvent(vdConstants.Event.STATE_CHANGED, retData);
+                    fireEvent(ecoConstants.Event.STATE_CHANGED, retData);
                 }
             }
 
